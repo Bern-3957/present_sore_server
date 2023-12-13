@@ -6,5 +6,8 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     image = models.ImageField(upload_to='users_images', null=True, blank=True)
-
-    REQUIRED_FIELDS = ["first_name", "last_name", "email"]
+    address = models.CharField(max_length=500)
+    consentReceiveNews = models.BooleanField(default=False)
+    consentPersonalData = models.BooleanField(default=False)
+    REQUIRED_FIELDS = ["first_name", "last_name", "email", "address", "consentReceiveNews", "consentPersonalData"]
+    FIELDS_TO_UPDATE = ["first_name", "last_name", "username", "email", "address", "consentReceiveNews", "consentPersonalData"]
