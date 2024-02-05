@@ -44,18 +44,16 @@ class CartAPIView(APIView):
 
     def get(self, request):
 
-        # cart_items = Cart.objects.filter(user=request.user)
-        # cart_serializer = CartSerializer(cart_items, many=True)
-        #
-        # products = [items.product for items in cart_items]
-        # product_serializer = ProductSerializer(products, many=True)
-        #
-        # return Response({
-        #     'carts': list(cart_serializer.data),
-        #     'carts_products': list(product_serializer.data)
-        # })
+        cart_items = Cart.objects.filter(user=request.user)
+        cart_serializer = CartSerializer(cart_items, many=True)
 
-        try:
+        products = [items.product for items in cart_items]
+        product_serializer = ProductSerializer(products, many=True)
+
+        return Response({
+            'carts': list(cart_serializer.data),
+            'carts_products': list(product_serializer.data)
+        })
 
     def post(self, request):
         product = get_object_or_404(Products, pk=int(request.data.get('product_id')))
